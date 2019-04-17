@@ -1,0 +1,67 @@
+<section class="content-header">
+  <h1>
+	数据字典
+    <small>检视</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统管理</a></li>
+    <li class="active">数据字典</li>
+  </ol>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-body">
+		            <form role="form" class="form-horizontal">
+		            	<fieldset>
+						<div class="form-group">
+					        <label class="col-md-3 control-label">分组编码:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysDictionary?.code}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					    <fieldset>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">分组名称:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysDictionary?.name}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					    <div class="table-scrollable">
+					    	<table class="table table-striped">
+					    		<thead>
+					    			<tr style="background-color: #ddd;">
+					    				<th>编码</th>
+					    				<th>名称</th>
+					    				<th>排序</th>
+					    			</tr>
+					    		</thead>
+					    		<tbody>
+					    			<tr th:each="child : ${sysDictionary?.children}">
+					    				<td>
+					    					<p class="form-control-static" th:text="${child.code}"></p>
+					    				</td>
+					    				<td>
+					    					<p class="form-control-static" th:text="${child.name}"></p>
+					    				</td>
+					    				<td>
+					    					<p class="form-control-static" th:text="${child.sort}"></p>
+					    				</td>
+					    			</tr>
+					    		</tbody>
+					    	</table>
+					    </div>
+		            </form>
+	            </div>
+	            <div class="box-footer">
+	            	<div class="col-md-9 col-md-offset-3">
+			          	<button type="button" class="btn btn-default" onclick="forwardPage('/sysDictionary/init')">返回</button>
+			        </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+</section>

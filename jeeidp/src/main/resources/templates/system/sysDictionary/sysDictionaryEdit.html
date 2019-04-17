@@ -1,0 +1,97 @@
+<section class="content-header">
+  <h1>
+	数据字典
+    <small>维护</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统管理</a></li>
+    <li class="active">数据字典</li>
+  </ol>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-body">
+		            <form id="sysDictionaryForm" role="form" class="form-horizontal">
+						<div class="form-group">
+					        <label class="col-md-3 control-label">分组编码:</label>
+					        <div class="col-md-5">
+					        	<input type="text" name="code" class="form-control" th:value="${sysDictionary?.code}" required="required" maxlength="50"/>
+					        </div>
+					    </div>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">分组名称:</label>
+					        <div class="col-md-5">
+					        	<input type="text" name="name" class="form-control" th:value="${sysDictionary?.name}" required="required" maxlength="50"/>
+					        </div>
+					    </div>
+					    <div style="padding: 10px;">
+					    	<button type="button" class="btn btn-warning" onclick="addItem()">
+					    		<i class="fa fa-plus"></i> 添加子项
+					    	</button>
+					    </div>
+					    <div class="table-scrollable">
+					    	<table id="childrenTable" class="table table-striped">
+					    		<thead>
+					    			<tr style="background-color: #ddd;">
+					    				<th></th>
+					    				<th>编码</th>
+					    				<th>名称</th>
+					    				<th>排序</th>
+					    			</tr>
+					    		</thead>
+					    		<tbody>
+					    			<tr th:each="child,childStat : ${sysDictionary?.children}">
+					    				<td class="text-center">
+					    					<button class="btn btn-danger" onclick="removeItem(this)">
+					    						<i class="fa fa-trash"></i>
+					    					</button>
+					    				</td>
+					    				<td>
+					    					<input type="text" th:name="'children['+${childStat.index}+'].code'" class="form-control" th:value="${child.code}" required="required"/>
+					    				</td>
+					    				<td>
+					    					<input type="text" th:name="'children['+${childStat.index}+'].name'" class="form-control" th:value="${child.name}" required="required"/>
+					    				</td>
+					    				<td>
+					    					<input type="text" th:name="'children['+${childStat.index}+'].sort'" class="form-control" th:value="${child.sort}" required="required"/>
+					    				</td>
+					    			</tr>
+					    		</tbody>
+					    	</table>
+					    </div>
+					    <input type="hidden" name="id" th:value="${sysDictionary?.id}">
+		            </form>
+	            </div>
+	            <div class="box-footer">
+	            	<div class="col-md-9 col-md-offset-3">
+						<button type="button" class="btn btn-primary" onclick="save()">保存</button>
+			          	<button type="button" class="btn btn-default" onclick="forwardPage('/sysDictionary/init')">取消</button>
+			        </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+	<div style="display: none;">
+  		<table id="trTemplate">
+  			<tr>
+  				<td class="text-center">
+   					<button class="btn btn-danger" onclick="removeItem(this)">
+  						<i class="fa fa-trash"></i>
+  					</button>
+   				</td>
+  				<td>
+  					<input type="text" name="children[#index#].code" class="form-control" required="required"/>
+  				</td>
+  				<td>
+  					<input type="text" name="children[#index#].name" class="form-control" required="required"/>
+  				</td>
+  				<td>
+  					<input type="text" name="children[#index#].sort" class="form-control" required="required"/>
+  				</td>
+  			</tr>
+  		</table>
+  	</div>
+	<script th:src="@{/js/system/sysDictionary/sysDictionary.js}"></script>
+</section>

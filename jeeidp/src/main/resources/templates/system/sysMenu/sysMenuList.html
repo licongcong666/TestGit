@@ -1,0 +1,63 @@
+<section class="content-header">
+  <h1>
+	菜单管理
+    <small>菜单列表</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统管理</a></li>
+    <li class="active">菜单管理</li>
+  </ol>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+        		<div class="box-header">
+        			<button type="button" id="addBtn" class="btn btn-success">
+						<i class="fa fa-plus icon-right-5"></i>新增
+					</button>
+        		</div>
+            	<div class="box-body">
+            		<div class="table-scrollable">
+						<table id="treetable" class="table table-hover">
+							<thead>
+								<tr>
+									<th width="40%">菜单名称</th>
+									<th width="35%">菜单路径</th>
+									<th width="25%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="menu : ${menuList}" th:id="${menu.id}" th:attr="pId=${menu.parentId},hasChild=true" th:if="${menu.childNum > 0}">
+									<td><span controller="true" th:text="${menu.menuName}"></span></td>
+									<td th:text="${menu.menuUrl}"></td>
+									<td>
+										<button type="button" th:onclick="'edit(\''+${menu.id}+'\')'" class="btn btn-sm btn-warning right-5">
+											<i class="fa fa-edit"></i>
+										</button>
+										<button type="button" th:onclick="'remove(\''+${menu.id}+'\')'" class="btn btn-sm btn-danger">
+											<i class="fa fa-trash-o"></i>
+										</button>
+									</td>
+								</tr>
+								<tr th:each="menu : ${menuList}" th:id="${menu.id}" th:attr="pId=${menu.parentId}" th:unless="${menu.childNum > 0}">
+									<td><span controller="true" th:text="${menu.menuName}"></span></td>
+									<td th:text="${menu.menuUrl}"></td>
+									<td>
+										<button type="button" th:onclick="'edit(\''+${menu.id}+'\')'" class="btn btn-sm btn-warning right-5">
+											<i class="fa fa-edit"></i>
+										</button>
+										<button type="button" th:onclick="'remove(\''+${menu.id}+'\')'" class="btn btn-sm btn-danger">
+											<i class="fa fa-trash-o"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+            	</div>
+        	</div>
+		</div>
+	</div>
+	<script th:src="@{/js/system/sysMenu/sysMenuList.js}"></script>
+</section>

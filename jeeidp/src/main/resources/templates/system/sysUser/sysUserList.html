@@ -1,0 +1,65 @@
+<section class="content-header">
+  <h1>
+	用户管理
+    <small>用户列表</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统管理</a></li>
+    <li class="active">用户管理</li>
+  </ol>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-header">
+	              	<form id="sysUserSearchForm" role="form" class="form-inline form-search">
+					    <div class="form-group">
+					    	<label class="control-label">用户名：</label>
+					      	<input type="text" class="form-control" id="username">
+					    </div>
+					    <div class="form-group">
+					      	<label class="control-label">姓名：</label>
+					      	<input type="text" class="form-control" id="name">
+					    </div>
+					    <div class="form-group">
+					      	<label class="control-label">电话：</label>
+					      	<input type="text" class="form-control" id="phone">
+					    </div>
+					</form>
+					<button type="button" id="addBtn" class="btn btn-success">
+						<i class="fa fa-plus icon-right-5"></i>新增
+					</button>
+					<button type="button" id="resetPwdBtn" class="btn btn-warning">
+						<i class="fa fa-reply icon-right-5"></i>重置密码
+					</button>
+					<button type="button" id="delBtn" class="btn btn-danger">
+						<i class="fa fa-trash-o icon-right-5"></i>删除
+					</button>
+			      	<button type="button" id="resetBtn" class="pull-right btn btn-default">
+			          	<i class="fa fa-refresh icon-right-5"></i>重置
+			      	</button>
+			      	<button type="button" id="searchBtn" class="pull-right btn btn-primary icon-right-5">
+			          	<i class="fa fa-search icon-right-5"></i>查询
+			      	</button>
+	            </div>
+            	<div class="box-body">
+	            	<table id="sysUserDataTable" class="table table-bordered table-hover">
+	            		<thead>
+	            			<tr>
+	            				<th><input type="checkbox" class="checkAll" onclick="checkAll(this)"/></th>
+	            				<th>用户名</th>
+	            				<th>名称</th>
+	            				<th>组织</th>
+	            				<th>电话</th>
+	            				<th>邮箱</th>
+	            				<th>操作</th>
+	            			</tr>
+	            		</thead>
+	            	</table>
+            	</div>
+        	</div>
+		</div>
+	</div>
+	<script th:src="@{/js/system/sysUser/sysUserList.js}"></script>
+</section>

@@ -1,0 +1,63 @@
+<section class="content-header">
+	<h1>
+		定时任务
+		<small>数据检视</small>
+	</h1>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-body">
+		            <form role="form" class="form-horizontal">
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">任务名称:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${sysScheduler?.jobName}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">任务分组:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${sysScheduler?.jobGroup}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">任务执行类:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${sysScheduler?.jobClass}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">cron表达式:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${sysScheduler?.cron}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">描述:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${sysScheduler?.description}"></p>
+							</div>
+						</div>
+						</fieldset>
+		            </form>
+	            </div>
+	            <div class="box-footer">
+	            	<div class="col-md-9 col-md-offset-3">
+	            		<button type="button" class="btn btn-default" onclick="forwardPage('/sysScheduler/init')">返回</button>
+			        </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+</section>

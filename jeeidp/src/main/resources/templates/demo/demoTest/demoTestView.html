@@ -1,0 +1,79 @@
+<section class="content-header">
+	<h1>
+		測試功能
+		<small>数据检视</small>
+	</h1>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-body">
+		            <form role="form" class="form-horizontal">
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">名称:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${demoTest?.name}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">年龄:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${demoTest?.age}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">出生日期:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${#dates.format(demoTest?.birthday, 'yyyy-MM-dd')}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">部门:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${demoTest?.deptId}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">性别:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${demoTest?.sex}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">爱好:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${demoTest?.hobby}"></p>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+							<label class="col-md-3 control-label">描述:</label>
+							<div class="col-md-5">
+								<p class="form-control-static" th:text="${demoTest?.remark}"></p>
+							</div>
+						</div>
+						</fieldset>
+		            </form>
+	            </div>
+	            <div class="box-footer">
+	            	<div class="col-md-9 col-md-offset-3">
+	            		<button type="button" class="btn btn-default" onclick="forwardPage('/demoTest/init')">返回</button>
+			        </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.biz.system.dao.SysLogDao">
+
+	<parameterMap id="parameterMap" type="com.idp.biz.system.entity.SysLog"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.biz.system.entity.SysLog">
+		<result property="id" column="id"/>
+		<result property="logType" column="log_type"/>
+		<result property="logTitle" column="log_title"/>
+		<result property="logContent" column="log_content"/>
+		<result property="operateUser" column="operate_user"/>
+		<result property="operateIp" column="operate_ip"/>
+		<result property="operateDate" column="operate_date"/>
+		<result property="logTypeText" column="log_type_text"/>
+		<result property="operateUserName" column="operate_user_name"/>
+		<result property="operateUserText" column="operate_user_text"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.log_type,
+			t.log_title,
+			t.log_content,
+			t.operate_user,
+			t.operate_ip,
+			t.operate_date,
+	 	</trim>
+	</sql>
+	
+	<select id="findByPage" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>,
+			u.username as operate_user_name,
+			u.name as operate_user_text
+		from sys_log t
+		left join sys_user u on u.id = t.operate_user
+		<where>
+			<if test="logType != null and logType != ''">
+				and t.log_type = #{logType}			
+			</if>
+			<if test="logTitle != null and logTitle != ''">
+				and t.log_title like concat('%',#{logTitle},'%')
+			</if>
+			<if test="operateUser != null and operateUser != ''">
+				and t.operate_user = #{operateUser}			
+			</if>
+			<if test="operateDateStart != null">
+				and t.operate_date >= #{operateDateStart}
+			</if>
+			<if test="operateDateEnd != null">
+				and t.operate_date <![CDATA[<]]> #{operateDateEnd} 
+			</if>
+		</where>
+		order by t.operate_date desc
+	</select>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from sys_log t
+		<where>
+			<if test="logType != null and logType != ''">
+				and t.log_type = #{logType}			
+			</if>
+			<if test="logTitle != null and logTitle != ''">
+				and t.log_title like concat('%',#{logTitle},'%')
+			</if>
+			<if test="operateUser != null and operateUser != ''">
+				and t.operate_user = #{operateUser}			
+			</if>
+			<if test="operateDateStart != null">
+				and t.operate_date >= #{operateDateStart}
+			</if>
+			<if test="operateDateEnd != null">
+				and t.operate_date <![CDATA[<]]> #{operateDateEnd} 
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>,
+			u.username as operate_user_name,
+			u.name as operate_user_text
+		from sys_log t
+		left join sys_user u on u.id = t.operate_user
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into sys_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+			id,
+			</if>
+			<if test="logType != null">
+			log_type,
+			</if>
+			<if test="logTitle != null">
+			log_title,
+			</if>
+			<if test="logContent != null">
+			log_content,
+			</if>
+			<if test="operateUser != null">
+			operate_user,
+			</if>
+			<if test="operateIp != null">
+			operate_ip,
+			</if>
+			<if test="operateDate != null">
+			operate_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+			#{id},
+			</if>
+			<if test="logType != null">
+			#{logType},
+			</if>
+			<if test="logTitle != null">
+			#{logTitle},
+			</if>
+			<if test="logContent != null">
+			#{logContent},
+			</if>
+			<if test="operateUser != null">
+			#{operateUser},
+			</if>
+			<if test="operateIp != null">
+			#{operateIp},
+			</if>
+			<if test="operateDate != null">
+			#{operateDate},
+			</if>
+		</trim>
+	</insert>
+	
+</mapper>

@@ -1,0 +1,101 @@
+<section class="content-header">
+  <h1>
+	用户管理
+    <small>用户信息</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统管理</a></li>
+    <li class="active">用户管理</li>
+  </ol>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-body">
+		            <form id="userForm" role="form" class="form-horizontal">
+		            	<fieldset>
+		            	<div class="form-group ">
+							<label class="control-label col-md-3">用户头像:</label>
+							<div class="col-md-9">
+								<div class="fileinput fileinput-new" data-provides="fileinput">
+									<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+										<img th:if="${sysUser?.userPhoto}" th:src="@{'/common/showImage?filePath='+${sysUser?.userPhoto}}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<div class="form-group">
+					        <label class="col-md-3 control-label">用户名:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysUser?.username}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					    <fieldset>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">姓名:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysUser?.name}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					    <fieldset>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">组织:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysUser?.orgName}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					    <fieldset>
+					    <div class="form-group">
+						  	<label class="col-md-3 control-label">角色:</label>
+						  	<div class="col-md-5">
+						  		<p class="form-control-static" th:text="${sysUser?.roleName}"></p>
+						  	</div>
+						</div>
+						</fieldset>
+						<fieldset>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">出生日期:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${#dates.format(sysUser?.birthday, 'yyyy-MM-dd')}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					    <fieldset>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">电话:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysUser?.phone}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					    <fieldset>
+					  	<div class="form-group">
+					        <label class="col-md-3 control-label">邮箱:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysUser?.email}"></p>
+					        </div>
+					    </div>
+					    </fieldset>
+					  	<div class="form-group">
+					        <label class="col-md-3 control-label">备注:</label>
+					        <div class="col-md-5">
+					        	<p class="form-control-static" th:text="${sysUser?.description}"></p>
+					        </div>
+					    </div>
+		            </form>
+	            </div>
+	            <div class="box-footer">
+	            	<div class="col-md-9 col-md-offset-3">
+			          	<button type="button" class="btn btn-default" onclick="forwardPage('/sysUser/init')">返回</button>
+			        </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+</section>

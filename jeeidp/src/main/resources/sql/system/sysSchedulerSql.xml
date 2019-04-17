@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.idp.biz.system.dao.SysSchedulerDao">
+
+	<parameterMap id="parameterMap" type="com.idp.biz.system.entity.SysScheduler"></parameterMap>
+	<resultMap id="resultMap" type="com.idp.biz.system.entity.SysScheduler">
+		<result property="id" column="id"/>
+		<result property="jobName" column="job_name"/>
+		<result property="jobGroup" column="job_group"/>
+		<result property="jobState" column="job_state"/>
+		<result property="jobClass" column="job_class"/>
+		<result property="cron" column="cron"/>
+		<result property="description" column="description"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="enabled" column="enabled"/>
+		<result property="createUser" column="create_user"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateUser" column="update_user"/>
+		<result property="updateDate" column="update_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.job_name,
+			t.job_group,
+			t.job_state,
+			t.job_class,
+			t.cron,
+			t.description,
+			t.start_time,
+			t.end_time,
+			t.enabled,
+			t.create_user,
+			t.create_date,
+			t.update_user,
+			t.update_date,
+	 	</trim>
+	</sql>
+	
+	<select id="findByPage" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from sys_scheduler t
+		<where>
+			<if test="jobName != null and jobName != ''">
+				and t.job_name like concat('%',#{jobName},'%')
+			</if>
+			<if test="jobGroup != null and jobGroup != ''">
+				and t.job_group like concat('%',#{jobGroup},'%')
+			</if>
+			<if test="jobState != null and jobState != ''">
+				and t.job_state = #{jobState}			
+			</if>
+			<if test="jobClass != null and jobClass != ''">
+				and t.job_class = #{jobClass}			
+			</if>
+			<if test="enabled != null and enabled != ''">
+				and t.enabled = #{enabled}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from sys_scheduler t
+		<where>
+			<if test="jobName != null and jobName != ''">
+				and t.job_name like concat('%',#{jobName},'%')
+			</if>
+			<if test="jobGroup != null and jobGroup != ''">
+				and t.job_group like concat('%',#{jobGroup},'%')
+			</if>
+			<if test="jobState != null and jobState != ''">
+				and t.job_state = #{jobState}			
+			</if>
+			<if test="jobClass != null and jobClass != ''">
+				and t.job_class = #{jobClass}			
+			</if>
+			<if test="enabled != null and enabled != ''">
+				and t.enabled = #{enabled}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from sys_scheduler t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into sys_scheduler
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+			id,			
+			</if>
+			<if test="jobName != null">
+			job_name,
+			</if>
+			<if test="jobGroup != null">
+			job_group,
+			</if>
+			<if test="jobState != null">
+			job_state,
+			</if>
+			<if test="jobClass != null">
+			job_class,
+			</if>
+			<if test="cron != null">
+			cron,
+			</if>
+			<if test="description != null">
+			description,
+			</if>
+			<if test="startTime != null">
+			start_time,
+			</if>
+			<if test="endTime != null">
+			end_time,
+			</if>
+			<if test="enabled != null">
+			enabled,
+			</if>
+			<if test="createUser != null">
+			create_user,
+			</if>
+			<if test="createDate != null">
+			create_user,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+			#{id},
+			</if>
+			<if test="jobName != null">
+			#{jobName},
+			</if>
+			<if test="jobGroup != null">
+			#{jobGroup},
+			</if>
+			<if test="jobState != null">
+			#{jobState},
+			</if>
+			<if test="jobClass != null">
+			#{jobClass},
+			</if>
+			<if test="cron != null">
+			#{cron},
+			</if>
+			<if test="description != null">
+			#{description},
+			</if>
+			<if test="startTime != null">
+			#{startTime},
+			</if>
+			<if test="endTime != null">
+			end_time = #{endTime},
+			</if>
+			<if test="enabled != null">
+			#{enabled},
+			</if>
+			<if test="createUser != null">
+			#{createUser},
+			</if>
+			<if test="createDate != null">
+			#{createDate},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update sys_scheduler
+		<set>
+			job_name = #{jobName},
+			job_group = #{jobGroup},
+			job_state = #{jobState},
+			job_class = #{jobClass},
+			cron = #{cron},
+			description = #{description},
+			start_time = #{startTime},
+			end_time = #{endTime},
+			enabled = #{enabled},
+			update_user = #{updateUser},
+			update_date = #{updateDate},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update sys_scheduler
+		<set>
+			<if test="jobName != null">
+			job_name = #{jobName},
+			</if>
+			<if test="jobGroup != null">
+			job_group = #{jobGroup},
+			</if>
+			<if test="jobState != null">
+			job_state = #{jobState},
+			</if>
+			<if test="jobClass != null">
+			job_class = #{jobClass},
+			</if>
+			<if test="cron != null">
+			cron = #{cron},
+			</if>
+			<if test="description != null">
+			description = #{description},
+			</if>
+			<if test="startTime != null">
+			start_time = #{startTime},
+			</if>
+			<if test="endTime != null">
+			end_time = #{endTime},
+			</if>
+			<if test="enabled != null">
+			enabled = #{enabled},
+			</if>
+			<if test="updateUser != null">
+			update_user = #{updateUser},
+			</if>
+			<if test="updateDate != null">
+			update_date = #{updateDate},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from sys_scheduler where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from sys_scheduler where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="enabled" parameterMap="parameterMap">
+		update sys_scheduler set enabled = #{enabled} where id = #{id}
+	</update>
+	
+</mapper>

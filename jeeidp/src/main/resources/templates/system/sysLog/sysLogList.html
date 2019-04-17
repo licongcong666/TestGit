@@ -1,0 +1,67 @@
+<section class="content-header">
+	<h1>
+		系统日志
+    	<small>数据列表</small>
+	</h1>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-header">
+	              	<form id="sysLogSearchForm" role="form" class="form-inline form-search">
+						<div class="form-group">
+							<label class="control-label">日志类型：</label>
+							<select id="logType" class="form-control">
+								<option value="">全部</option>
+								<option value="1">功能信息</option>
+								<option value="2">功能异常</option>
+								<option value="3">定时任务异常</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label">日志标题：</label>
+							<input type="text" id="logTitle" class="form-control" />
+						</div>
+						<div class="form-group">
+							<label class="control-label">操作人：</label>
+							<select id="operateUser" class="form-control">
+								<option value="">全部</option>
+								<option value="system">系统操作</option>
+								<option th:each="user : ${userList}" th:value="${user.id}" th:text="${user.username}+ '-' +${user.name}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="control-label">操作时间：</label>
+							<input type="text" id="operateDateStart" class="form-control datepicker" readonly="readonly" style="width:100px;"/>
+							-
+							<input type="text" id="operateDateEnd" class="form-control datepicker" readonly="readonly" style="width:100px;"/>
+						</div>
+					</form>
+			      	<button type="button" id="resetBtn" class="pull-right btn btn-default">
+			          	<i class="fa fa-refresh icon-right-5"></i>重置
+			      	</button>
+			      	<button type="button" id="searchBtn" class="pull-right btn btn-primary icon-right-5">
+			          	<i class="fa fa-search icon-right-5"></i>查询
+			      	</button>
+	            </div>
+            	<div class="box-body">
+	            	<table id="sysLogDataTable" class="table table-bordered table-hover">
+	            		<thead>
+	            			<tr>
+	            				<th><input type="checkbox" class="checkAll" onclick="checkAll(this)"/></th>
+								<th>日志类型</th>
+								<th>日志标题</th>
+								<th>操作人</th>
+								<th>操作IP</th>
+								<th>操作时间</th>
+	            				<th>操作</th>
+	            			</tr>
+	            		</thead>
+	            	</table>
+            	</div>
+        	</div>
+		</div>
+	</div>
+	<script th:src="@{/js/system/sysLog/sysLogList.js}"></script>
+</section>

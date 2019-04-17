@@ -1,0 +1,82 @@
+<section class="content-header">
+  <h1>
+	菜单管理
+    <small>菜单维护</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统管理</a></li>
+    <li class="active">菜单管理</li>
+  </ol>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-body">
+		            <form id="sysMenuForm" role="form" class="form-horizontal">
+						<div class="form-group">
+					        <label class="col-md-3 control-label">菜单名称:</label>
+					        <div class="col-md-5">
+					        	<input type="text" name="menuName" class="form-control" th:value="${sysMenu?.menuName}" required="required" maxlength="200"/>
+					        </div>
+					    </div>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">访问路径:</label>
+					        <div class="col-md-5">
+					        	<input type="text" name="menuUrl" class="form-control" th:value="${sysMenu?.menuUrl}" maxlength="200"/>
+					        </div>
+					    </div>
+					  	<div class="form-group">
+					        <label class="col-md-3 control-label">图标:</label>
+					        <div class="col-md-5">
+					        	<input type="text" class="form-control" name="menuIcon" th:value="${sysMenu?.menuIcon}" maxlength="100"/>
+					        </div>
+					    </div>
+					    <div class="form-group">
+					    	<label class="col-md-3 control-label">上级菜单:</label>
+					    	<div class="col-md-5">
+					    		<input type="hidden" id="parentId" name="parentId" th:value="${sysMenu?.parentId}"/>
+					    		<input type="text" class="form-control" id="parentName" name="parentName" onclick="showMenu()" readonly="readonly"
+	          						th:value="${sysMenu?.parentMenu?.menuName}" maxlength="200"/>
+					    	</div>
+					    	<div class="col-md-2">
+					    		<button type="button" class="btn btn-default" onclick="clearParentMenu()">清空</button>
+					    	</div>
+					    </div>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">排序:</label>
+					        <div class="col-md-5">
+					        	<input type="text" class="form-control" name="sort" th:value="${sysMenu?.sort}" required="required" maxlength="3"/>
+					        </div>
+					    </div>
+					    <input type="hidden" name="id" th:value="${sysMenu?.id}">
+		            </form>
+	            </div>
+	            <div class="box-footer">
+	            	<div class="col-md-9 col-md-offset-3">
+						<button type="button" class="btn btn-primary" onclick="save()">保存</button>
+			          	<button type="button" class="btn btn-default" onclick="forwardPage('/sysMenu/init')">取消</button>
+			        </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+	<div class="modal fade" id="menuModal" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title">选择上级菜单</h4>
+				</div>
+				<div class="modal-body">
+					 <ul id="menuTree" class="ztree" style="margin-top:0; width:160px;"></ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="saveParentMenu()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/js/system/sysMenu/sysMenu.js}"></script>
+</section>

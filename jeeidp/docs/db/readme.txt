@@ -1,0 +1,2 @@
+1.sql脚本建议用Navicat Premium工具执行
+2.如果您使用的oracle数据库，新增或修改时，建议不要赋值为null，如果必须要赋值为null，可以再后面加上jdbcType

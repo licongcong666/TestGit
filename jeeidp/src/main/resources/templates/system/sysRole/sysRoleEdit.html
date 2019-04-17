@@ -1,0 +1,78 @@
+<section class="content-header">
+  <h1>
+	角色管理
+    <small>角色维护</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> 系统管理</a></li>
+    <li class="active">角色管理</li>
+  </ol>
+</section>
+<section class="content" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="box">
+	            <div class="box-body">
+		            <form id="sysRoleForm" role="form" class="form-horizontal">
+						<div class="form-group">
+					        <label class="col-md-3 control-label">角色编码:</label>
+					        <div class="col-md-5">
+					        	<input type="text" name="roleCode" class="form-control" th:value="${sysRole?.roleCode}" required="required" maxlength="50"/>
+					        </div>
+					    </div>
+					    <div class="form-group">
+					        <label class="col-md-3 control-label">角色名称:</label>
+					        <div class="col-md-5">
+					        	<input type="text" name="roleName" class="form-control" th:value="${sysRole?.roleName}" required="required" maxlength="50"/>
+					        </div>
+					    </div>
+					  	<div class="form-group">
+					        <label class="col-md-3 control-label">备注:</label>
+					        <div class="col-md-5">
+					        	<textarea rows="5" name="description" class="form-control" th:text="${sysRole?.description}" maxlength="255"></textarea>
+					        </div>
+					    </div>
+					    <div class="form-group">
+					    	<label class="col-md-3 control-label">菜单权限:</label>
+					    	<div class="col-md-5">
+					    		<input type="hidden" id="menuIds" name="menuIds"/>
+        						<ul id="menuTree" class="ztree" style="margin-top:0; width:160px;"></ul>
+					    	</div>
+					    </div>
+					    <input type="hidden" name="id" th:value="${sysRole?.id}">
+		            </form>
+	            </div>
+	            <div class="box-footer">
+	            	<div class="col-md-9 col-md-offset-3">
+						<button type="button" class="btn btn-primary" onclick="save()">保存</button>
+			          	<button type="button" class="btn btn-default" onclick="forwardPage('/sysRole/init')">取消</button>
+			        </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+	<script type="text/javascript" th:inline="javascript">
+		$(function(){
+			
+			var setting = {
+				check: {
+					enable: true
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				view: {
+					showIcon: false
+				}
+			};
+			
+			// 加载菜单
+			var data = /*[[${menuList}]]*/ '';
+			$.fn.zTree.init($("#menuTree"), setting, data);
+			$.fn.zTree.getZTreeObj("menuTree").expandAll(true);
+		});
+	</script>
+	<script th:src="@{/js/system/sysRole/sysRole.js}"></script>
+</section>
